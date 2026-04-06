@@ -1,0 +1,18 @@
+button {
+  width: 100%;
+  padding: 1rem;
+  background: #2A6F97;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.card {
+  background: white;
+  border: 1px solid #61A5C2;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}

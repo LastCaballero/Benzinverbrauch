@@ -1,0 +1,29 @@
+.tabs {
+  display: flex;
+  background: #61A5C2;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  background: #61A5C2;
+  color: white;
+  font-size: 1rem;
+}
+
+.tabs button.active {
+  background: #2A6F97;
+}
+
+main {
+  padding: 1rem;
+}
+
+.tab {
+  display: none;
+}
+
+.tab.active {
+  display: block;
+}

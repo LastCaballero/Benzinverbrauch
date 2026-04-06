@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #F0F8FF;
+  color: #012A4A;
+}
+
+h1 {
+  margin: 0;
+  padding: 1rem;
+  background: #2A6F97;
+  color: white;
+  text-align: center;
+}
+
+label {
+  margin-top: 1rem;
+  display: block;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: .7rem;
+  border: 1px solid #61A5C2;
+  border-radius: 6px;
+  margin-bottom: .5rem;
+  background: white;
+}
