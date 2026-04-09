@@ -15,4 +15,43 @@ button {
   border-radius: 6px;
   padding: 1rem;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.delete-btn {
+  width: auto;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0 0 1rem;
+  font-size: 0.85rem;
+  background: #E63946;
+}
+
+.delete-btn:hover {
+  background: #D62828;
+}
+
+.feedback {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #4CAF50;
+  color: white;
+  border-radius: 6px;
+  text-align: center;
+  display: none;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.feedback.show {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

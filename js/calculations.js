@@ -1,4 +1,5 @@
 export function calcVerbrauch(liter, km) {
+  if (km <= 0) return 0;
   return (liter / km) * 100;
 }
 
