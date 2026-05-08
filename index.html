@@ -57,12 +57,19 @@
         placeholder="z. B. 1.79">
 
       <button id="saveEntry">Speichern</button>
+
+
       <div id="feedback" class="feedback"></div>
     </section>
 
     <!-- TAB: Historie -->
     <section id="historie" class="tab">
       <div id="historyList"></div>
+      <button id="exportBtn">
+        Backup exportieren
+      </button>
+      <button id="importBtn">Backup importieren</button>
+      <input type="file" id="importFile" accept="application/json" hidden />
     </section>
 
     <!-- TAB: Stats -->
