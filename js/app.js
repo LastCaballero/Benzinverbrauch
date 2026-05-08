@@ -1,6 +1,15 @@
-import { loadEntries, saveEntries } from "./storage.js";
+import {
+  loadEntries,
+  saveEntries,
+  exportBackup,
+  importBackupFile
+} from "./storage.js";
 import { calcVerbrauch, calcKosten } from "./calculations.js";
 import { renderHistory, renderStats } from "./ui.js";
+
+
+
+
 
 let entries = loadEntries();
 
@@ -80,3 +89,23 @@ saveBtn.addEventListener("click", () => {
 
 renderHistory(entries, deleteEntry);
 renderStats(entries);
+document
+  .getElementById("exportBtn")
+  .addEventListener("click", exportBackup);
+
+const importFile = document.getElementById("importFile");
+const importBtn = document.getElementById("importBtn");
+
+importBtn.addEventListener("click", () => {
+  importFile.click();
+});
+
+importFile.addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  await importBackupFile(file);
+
+  // Reset damit gleiche Datei erneut geladen werden kann
+  importFile.value = "";
+});
