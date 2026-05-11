@@ -1,4 +1,6 @@
 import { calcDurchschnitt } from "./calculations.js";
+let verbrauchChartInstance = null;
+let preisChartInstance = null;
 
 export function renderHistory(entries, deleteEntry, editEntry) {
   const container = document.getElementById("historyList");
@@ -54,6 +56,7 @@ export function renderHistory(entries, deleteEntry, editEntry) {
   });
 }
 
+/*
 export function renderStats(entries) {
   if (entries.length === 0) {
     document.getElementById("avgVerbrauch").textContent = "–";
@@ -65,4 +68,110 @@ export function renderStats(entries) {
     document.getElementById("avgKosten").textContent =
       calcDurchschnitt(entries, "kosten").toFixed(2);
   }
+}
+*/
+export function renderStats(entries) {
+
+  if (entries.length === 0) {
+
+    document.getElementById("avgVerbrauch")
+      .textContent = "–";
+
+    document.getElementById("avgKosten")
+      .textContent = "–";
+
+    return;
+  }
+
+  // Durchschnittswerte
+  document.getElementById("avgVerbrauch")
+    .textContent =
+      calcDurchschnitt(entries, "verbrauch")
+        .toFixed(2);
+
+  document.getElementById("avgKosten")
+    .textContent =
+      calcDurchschnitt(entries, "kosten")
+        .toFixed(2);
+
+  // Nach Datum sortieren
+  const sorted = [...entries].sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  const labels = sorted.map(e => e.date);
+
+  const verbrauchData = sorted.map(e => {
+    return Number(e.verbrauch.toFixed(2));
+  });
+
+  const preisData = sorted.map(e => {
+
+    if (!e.liter || !e.kosten) {
+      return 0;
+    }
+
+    return Number(
+      (e.kosten / e.liter).toFixed(2)
+    );
+  });
+
+  // Alte Charts zerstören
+  if (verbrauchChartInstance) {
+    verbrauchChartInstance.destroy();
+  }
+
+  if (preisChartInstance) {
+    preisChartInstance.destroy();
+  }
+
+  // Verbrauchsdiagramm
+  verbrauchChartInstance = new Chart(
+    document.getElementById("verbrauchChart"),
+    {
+      type: "line",
+
+      data: {
+        labels,
+
+        datasets: [
+          {
+            label: "Verbrauch",
+            data: verbrauchData,
+            borderWidth: 2,
+            tension: 0.25
+          }
+        ]
+      },
+
+      options: {
+        responsive: true
+      }
+    }
+  );
+
+  // Preisdiagramm
+  preisChartInstance = new Chart(
+    document.getElementById("preisChart"),
+    {
+      type: "line",
+
+      data: {
+        labels,
+
+        datasets: [
+          {
+            label: "Preis/Liter",
+            data: preisData,
+            borderWidth: 2,
+            tension: 0.25
+          }
+        ]
+      },
+
+      options: {
+        responsive: true
+      }
+    }
+  );
 }
