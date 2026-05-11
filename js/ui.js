@@ -56,20 +56,6 @@ export function renderHistory(entries, deleteEntry, editEntry) {
   });
 }
 
-/*
-export function renderStats(entries) {
-  if (entries.length === 0) {
-    document.getElementById("avgVerbrauch").textContent = "–";
-    document.getElementById("avgKosten").textContent = "–";
-  } else {
-    document.getElementById("avgVerbrauch").textContent =
-      calcDurchschnitt(entries, "verbrauch").toFixed(2);
-
-    document.getElementById("avgKosten").textContent =
-      calcDurchschnitt(entries, "kosten").toFixed(2);
-  }
-}
-*/
 export function renderStats(entries) {
 
   if (entries.length === 0) {
@@ -93,6 +79,22 @@ export function renderStats(entries) {
     .textContent =
       calcDurchschnitt(entries, "kosten")
         .toFixed(2);
+
+// Gesamte Liter
+const totalLiter = entries.reduce((sum, e) => {
+  return sum + e.liter;
+}, 0);
+
+document.getElementById("totalLiter")
+  .textContent = totalLiter.toFixed(2);
+
+// Gesamtkosten
+const totalKosten = entries.reduce((sum, e) => {
+  return sum + e.kosten;
+}, 0);
+
+document.getElementById("totalKosten")
+  .textContent = totalKosten.toFixed(2);
 
   // Nach Datum sortieren
   const sorted = [...entries].sort((a, b) => {
