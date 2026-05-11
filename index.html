@@ -89,17 +89,79 @@
       </button>
       <button id="importBtn">Backup importieren</button>
       <input type="file" id="importFile" accept="application/json" hidden />
+
+    <button id="resetBtn" class="delbutton">
+      alle Daten löschen
+    </button>
+
+    <div class="status" id="status">
+     Hinweis: <br/>
+     Der Import fehlerhaft bearbeiteter Backups kann die Datenbank beschädigen. <br />
+     In dem Fall muss die komplette Datenbank gelöscht werden.
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("resetBtn");
+    const status = document.getElementById("status");
+
+    btn.addEventListener("click", () => {
+      localStorage.removeItem("tankEntries");
+
+      status.textContent = "✓ tankEntries wurde gelöscht";
+
+      setTimeout(() => {
+        location.reload();
+      }, 1000);
+    });
+  </script>
     </section>
 
     <!-- TAB: Stats -->
     <section id="stats" class="tab">
-      <p>Ø Verbrauch: <span id="avgVerbrauch">–</span> L/100km</p>
-      <p>Ø Kosten: <span id="avgKosten">–</span> €</p>
-    </section>
+     <p>
+    Ø Verbrauch:
+    <span id="avgVerbrauch">–</span>
+    L/100km
+  </p>
 
+  <p>
+    Ø Kosten:
+    <span id="avgKosten">–</span>
+    €
+  </p>
+
+  <p>
+    Gesamte Liter:
+    <span id="totalLiter">–</span>
+    L
+  </p>
+
+  <p>
+    Gesamtkosten:
+    <span id="totalKosten">–</span>
+    €
+  </p>
+
+<div class="chart-card">
+    <h3>Verbrauchsentwicklung</h3>
+    <canvas id="verbrauchChart"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Preisentwicklung</h3>
+    <canvas id="preisChart"></canvas>
+  </div>
+
+    <div class="status" id="status">
+     Hinweis: <br/>
+     Diagramme nutzen Scripte von jsdelivr.net
+    </div>
+    </section>
   </main>
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="module" src="js/app.js?v=1.1"></script>
 
 </body>
